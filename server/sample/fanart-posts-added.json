@@ -1,0 +1,37 @@
+{
+    "data": [
+      {
+        "id": "1910000000000000023",
+        "text": "はじめて投稿します!推しの四季を描きました🍁 #oshiArt",
+        "created_at": "2026-10-06T12:00:00.000Z",
+        "author_id": "3000000006",
+        "attachments": { "media_keys": ["3_1910000000000001034", "3_1910000000000001035", "3_1910000000000001036", "3_1910000000000001037"] }
+      },
+      {
+        "id": "1910000000000000022",
+        "text": "新曲のお知らせを聞いて、急いで描きました🎵 #oshiArt",
+        "created_at": "2026-10-05T09:40:00.000Z",
+        "author_id": "3000000002",
+        "attachments": { "media_keys": ["3_1910000000000001033"] }
+      }
+    ],
+    "includes": {
+      "users": [
+        { "id": "3000000002", "name": "みどりのペン", "username": "midori_pen", "profile_image_url": "https://placehold.co/96x96/png?text=M" },
+        { "id": "3000000006", "name": "そらいろクレヨン", "username": "sorairo_crayon", "profile_image_url": "https://placehold.co/96x96/png?text=S" }
+      ],
+      "media": [
+        { "media_key": "3_1910000000000001033", "type": "photo", "url": "https://placehold.co/600x800/png?text=art-33" },
+        { "media_key": "3_1910000000000001034", "type": "photo", "url": "https://placehold.co/600x800/png?text=art-34" },
+        { "media_key": "3_1910000000000001035", "type": "photo", "url": "https://placehold.co/600x800/png?text=art-35" },
+        { "media_key": "3_1910000000000001036", "type": "photo", "url": "https://placehold.co/600x800/png?text=art-36" },
+        { "media_key": "3_1910000000000001037", "type": "photo", "url": "https://placehold.co/600x800/png?text=art-37" }
+      ]
+    },
+    "meta": {
+      "newest_id": "1910000000000000023",
+      "oldest_id": "1910000000000000022",
+      "result_count": 2
+    }
+  }
+  

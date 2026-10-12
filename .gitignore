@@ -1,0 +1,22 @@
+# 秘密の設定(.env と、その別名のファイル)。項目名だけの見本は上げる
+.env
+.env.*
+!.env.example
+
+# npm install で入れ直せるライブラリ
+node_modules/
+
+# 組み立てた結果(vite build でできる)
+dist/
+
+# ログ
+*.log
+
+# OS やエディタが自動で作るファイル
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# AI ツールが、この PC だけのために作る設定
+.claude/

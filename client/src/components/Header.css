@@ -1,0 +1,23 @@
+/* 画面の上部(サイト名を左、最終取得時刻を右に置く。狭い画面では折り返す) */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  
+  /* サイト名 */
+  .header-title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* 最終取得時刻(控えめな色と小さめの文字にする) */
+  .header-fetched {
+    margin: 0;
+    color: var(--color-text-sub);
+    font-size: var(--font-size-sm);
+  }
+  

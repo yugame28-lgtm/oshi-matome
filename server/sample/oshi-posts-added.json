@@ -1,0 +1,45 @@
+{
+    "data": [
+      {
+        "id": "1900000000000000025",
+        "text": "明日の配信はお休みです。また来週!",
+        "created_at": "2026-10-06T10:30:00.000Z",
+        "author_id": "2000000001",
+        "attachments": { "media_keys": ["3_1900000000000001014"] }
+      },
+      {
+        "id": "1900000000000000024",
+        "text": "リハーサルの様子です📷",
+        "created_at": "2026-10-05T08:15:00.000Z",
+        "author_id": "2000000001",
+        "attachments": { "media_keys": ["3_1900000000000001012", "3_1900000000000001013"] }
+      },
+      {
+        "id": "1900000000000000023",
+        "text": "新曲のお知らせです🎵\n金曜の20時に公開します。",
+        "created_at": "2026-10-04T03:00:00.000Z",
+        "author_id": "2000000001"
+      }
+    ],
+    "includes": {
+      "users": [
+        {
+          "id": "2000000001",
+          "name": "推しの名前",
+          "username": "oshi_id",
+          "profile_image_url": "https://placehold.co/96x96/png"
+        }
+      ],
+      "media": [
+        { "media_key": "3_1900000000000001012", "type": "photo", "url": "https://placehold.co/600x400/png?text=12" },
+        { "media_key": "3_1900000000000001013", "type": "photo", "url": "https://placehold.co/600x400/png?text=13" },
+        { "media_key": "3_1900000000000001014", "type": "photo", "url": "https://placehold.co/600x400/png?text=14" }
+      ]
+    },
+    "meta": {
+      "newest_id": "1900000000000000025",
+      "oldest_id": "1900000000000000023",
+      "result_count": 3
+    }
+  }
+  

@@ -1,0 +1,58 @@
+/* サイト全体で使う共通の値(仮の値。フェーズ2で決め直す) */
+:root {
+  /* 色 */
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text: #222222;
+  --color-text-sub: #666666;
+  --color-border: #dddddd;
+  --color-accent: #1d6fd8;
+
+  /* 余白 */
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+
+  /* 文字サイズ(小さめ) */
+  --font-size-sm: 0.875rem;
+
+  /* 角の丸み */
+  --radius: 8px;
+
+  /* PCでの横幅の上限 */
+  --content-max-width: 600px;
+}
+
+/* 幅や高さの計算に、余白と枠線を含める(サイズがずれにくくなる) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ページ全体の背景・文字色・フォント */
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: sans-serif;
+  line-height: 1.6;
+}
+
+/* 画面全体の入れ物(中央に寄せ、横幅に上限を設ける) */
+.app {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-4);
+}
+
+/* 取得に失敗したときの案内(カードと同じ白地・枠線にして、太字で目立たせる) */
+.app-notice {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: bold;
+  text-align: center;
+}

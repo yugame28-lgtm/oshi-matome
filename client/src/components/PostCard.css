@@ -1,0 +1,80 @@
+/* カード全体の枠 */
+.post-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+  
+  /* 上段:アイコンと投稿者情報を横に並べる */
+  .post-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  
+  /* アイコン(丸く切り抜く。幅が縮まないようにする) */
+  .post-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  
+  /* アイコンがないときの代わりの丸 */
+  .post-card-icon-empty {
+    background: var(--color-border);
+  }
+  
+  /* 投稿者情報(長い名前でもカードからはみ出さないようにする) */
+  .post-card-author {
+    min-width: 0;
+  }
+  
+  /* 投稿者名と @ID を横に並べ、入りきらなければ折り返す */
+  /* 空白のない長い名前でも、カードの幅で折り返す */
+  .post-card-names {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--space-2);
+    overflow-wrap: anywhere;
+  }
+  
+  /* 投稿者名 */
+  .post-card-name {
+    font-weight: bold;
+  }
+  
+  /* @ID と投稿日時は控えめな色にする */
+  .post-card-username,
+  .post-card-date {
+    color: var(--color-text-sub);
+    font-size: var(--font-size-sm);
+  }
+  
+  /* 本文(改行を保持し、長い英数字やURLも折り返す) */
+  .post-card-text {
+    margin: var(--space-3) 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  
+  /* 下段:リンクを右に寄せる */
+  .post-card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* 「Xで見る」リンク */
+  .post-card-link {
+    color: var(--color-accent);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+  }
+  
+  /* マウスを乗せたときに下線を出す */
+  .post-card-link:hover {
+    text-decoration: underline;
+  }
+  

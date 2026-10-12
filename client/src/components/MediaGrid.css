@@ -1,0 +1,44 @@
+/* 画像の入れ物(マス目で並べ、角を丸める) */
+.media-grid {
+    display: grid;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  
+  /* 1枚:横いっぱいに1列 */
+  .media-grid-one {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 2枚、3〜4枚:横に2列(3枚以上は自動で2段目に回る) */
+  .media-grid-two,
+  .media-grid-four {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  /* 画像1枚ごと(マスいっぱいに広げ、はみ出た部分は切り取る) */
+  .media-grid-image {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    /* 読み込み中は灰色の四角を見せる */
+    background: var(--color-border);
+  }
+  
+  /* 1枚:横長(16:9)で大きく見せる */
+  .media-grid-one .media-grid-image {
+    aspect-ratio: 16 / 9;
+  }
+  
+  /* 2枚:2枚並べたときに、全体が 16:9 になる縦長 */
+  .media-grid-two .media-grid-image {
+    aspect-ratio: 8 / 9;
+  }
+  
+  /* 3〜4枚:4枚並べたときに、全体が 16:9 になる横長 */
+  .media-grid-four .media-grid-image {
+    aspect-ratio: 16 / 9;
+  }
+  

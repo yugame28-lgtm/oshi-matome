@@ -1,0 +1,40 @@
+/* タブを横に並べ、下に区切り線を引く */
+.topic-tabs {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  /* タブ1つ(ボタンの初期の見た目を消し、文字だけのタブにする) */
+  .topic-tab {
+    padding: var(--space-2) var(--space-4);
+    border: none;
+    /* 選択中の線を引く場所を、ふだんは透明にして確保しておく */
+    border-bottom: 3px solid transparent;
+    /* 下の線を、区切り線にぴったり重ねる */
+    margin-bottom: -1px;
+    background: none;
+    color: var(--color-text-sub);
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* マウスを乗せたとき(選択中でないタブ)は、文字を濃くする */
+  .topic-tab:hover {
+    color: var(--color-text);
+  }
+  
+  /* 選択中のタブ:文字と下線を青にする(名札を2つにして、マウスを乗せたときの指定より優先させる) */
+.topic-tab.topic-tab-selected {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+  
+  
+  /* キーボードで選んでいるときは、枠を出して位置を分かるようにする */
+  .topic-tab:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
