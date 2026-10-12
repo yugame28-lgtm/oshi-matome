@@ -58,7 +58,7 @@ Node.js 24 と MySQL 9.7 が入っていることを前提にしています。
 ### 1. コードを取得する
 
 ```
-git clone https://github.com/ユーザー名/oshi-matome.git
+git clone https://github.com/yugame28-lgtm/oshi-matome.git
 cd oshi-matome
 ```
 
