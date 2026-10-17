@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS posts (
   post_url VARCHAR(500) NOT NULL,
   -- 取り込んだ日時(UTC)
   fetched_at DATETIME NOT NULL,
+  -- お気に入りか(最初は、お気に入りではない)。お気に入りの投稿は、保存期間を過ぎても消さない
+  is_favorite BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (id),
   -- 同じトピックに同じ投稿IDを2回入れられないようにする
   UNIQUE KEY uq_posts_topic_x_post (topic_id, x_post_id),

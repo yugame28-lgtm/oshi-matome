@@ -42,10 +42,11 @@ function compareNewestFirst(a, b) {
   return idA < idB ? 1 : -1
 }
 
-// トピックの新しい投稿を取ってくる
 // 受け取るもの:トピック(query_type と、前回取った最新の投稿ID last_post_id を使う)
+// 取りに行く量の絞り込み(startTime:この日時より前は取らない / maxCount:件数の上限。どちらも null なら絞らない)
 // 返すもの:{ posts: 前回より新しい投稿(新しい順), newestId: 今回までの最新の投稿ID }
-export async function fetchFromSample(topic) {
+export async function fetchFromSample(topic, { startTime, maxCount }) {
+
   // このトピックの取得条件に対応する、サンプルファイルの一覧
   const fileNames = SAMPLE_FILES[topic.query_type] ?? []
 
@@ -59,14 +60,21 @@ export async function fetchFromSample(topic) {
     allPosts.push(...buildPosts(response))
   }
 
-  // 差分取得:前回取った最新の投稿IDより新しいものだけを残す(一度も取っていなければ、すべて)
-  const newPosts =
+    // 差分取得:前回取った最新の投稿IDより新しいものだけを残す(一度も取っていなければ、すべて)
+    const diffPosts =
     topic.last_post_id === null
       ? allPosts
       : allPosts.filter((post) => BigInt(post.x_post_id) > BigInt(topic.last_post_id))
 
+  // さかのぼる範囲:startTime より前に投稿されたものを外す(X API では、取りに行くときに範囲を指定する)
+  const rangePosts =
+    startTime === null ? diffPosts : diffPosts.filter((post) => post.posted_at >= startTime)
+
   // 新しい順に並べる
-  newPosts.sort(compareNewestFirst)
+  rangePosts.sort(compareNewestFirst)
+
+  // 件数の上限:新しいものから maxCount 件だけ残す(X API では、取りに行くときに件数を指定する)
+  const newPosts = maxCount === null ? rangePosts : rangePosts.slice(0, maxCount)
 
   // 今回までの最新の投稿ID(新しい投稿がなければ、前回の値のまま)
   const newestId = newPosts.length > 0 ? newPosts[0].x_post_id : topic.last_post_id

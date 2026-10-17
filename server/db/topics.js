@@ -29,18 +29,20 @@ export async function existsTopic(topicId) {
   return rows.length > 0
 }
 
-// 取得(API 2)に使う情報を、すべてのトピックについて id の順に取り出す
-export async function findTopicsForRefresh() {
+// 取得(API 2)に使う情報を、指定したトピックについて取り出す(トピックがなければ null)
+export async function findTopicForRefresh(topicId) {
   // 取得条件(query_type、query_value)と、前回の取得状況(last_fetched_at、last_post_id)を選ぶ
   const [rows] = await pool.query(
     `SELECT id, query_type, query_value, last_fetched_at, last_post_id
        FROM topics
-      ORDER BY id`,
+      WHERE id = ?`,
+    [topicId],
   )
 
-  // トピックの配列を返す
-  return rows
+  // 1行目を返す。なければ null
+  return rows[0] ?? null
 }
+
 
 // 取得が終わったトピックの取得状況を更新する
 // lastFetchedAt:今回取得した時刻 / lastPostId:今回までに取った最新の投稿ID

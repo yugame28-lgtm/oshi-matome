@@ -17,22 +17,35 @@ function formatFetchedAt(fetchedAt) {
   })
 }
 
-// 画面の上部:サイト名と、選択中のトピックの最終取得時刻を表示する部品
+// 画面の上部:サイト名と、選択中のトピックの最終取得時刻と、更新ボタンを表示する部品
 // lastFetchedAt の受け取り方:
-//   undefined(何も渡されない)… トピックがまだ届いていない → 時刻の部分を表示しない
+//   undefined(何も渡されない)… トピックがまだ届いていない → 時刻とボタンを表示しない
 //   null                     … 一度も取得していない → 「まだありません」
 //   日時の文字列             … その時刻を表示する
-function Header({ lastFetchedAt }) {
+// isRefreshing:更新ボタンからの取得の最中か / onRefresh:更新ボタンを押したときに呼ぶ関数
+function Header({ lastFetchedAt, isRefreshing, onRefresh }) {
   return (
     <header className="header">
       {/* サイト名 */}
       <h1 className="header-title">推しまとめ</h1>
 
-      {/* トピックが届いてから、最終取得時刻を表示する */}
+      {/* トピックが届いてから、最終取得時刻と更新ボタンを表示する */}
       {lastFetchedAt !== undefined && (
-        <p className="header-fetched">
-          最終取得: {lastFetchedAt === null ? 'まだありません' : formatFetchedAt(lastFetchedAt)}
-        </p>
+        <div className="header-side">
+          <p className="header-fetched">
+            最終取得: {lastFetchedAt === null ? 'まだありません' : formatFetchedAt(lastFetchedAt)}
+          </p>
+
+          {/* 更新ボタン(取りに行っている最中は押せなくし、文字を「更新中」にする) */}
+          <button
+            type="button"
+            className="header-refresh"
+            onClick={onRefresh}
+            disabled={isRefreshing}
+          >
+            {isRefreshing ? '更新中' : '更新'}
+          </button>
+        </div>
       )}
     </header>
   )

@@ -1,23 +1,54 @@
-/* 画面の上部(サイト名を左、最終取得時刻を右に置く。狭い画面では折り返す) */
+/* 画面の上部(サイト名を左、最終取得時刻と更新ボタンを右に置く。狭い画面では折り返す) */
 .header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-2);
-    margin-bottom: var(--space-4);
-  }
-  
-  /* サイト名 */
-  .header-title {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  
-  /* 最終取得時刻(控えめな色と小さめの文字にする) */
-  .header-fetched {
-    margin: 0;
-    color: var(--color-text-sub);
-    font-size: var(--font-size-sm);
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* サイト名 */
+.header-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* 右側のまとまり(最終取得時刻と更新ボタンを、横に並べる) */
+.header-side {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+/* 最終取得時刻(控えめな色と小さめの文字にする) */
+.header-fetched {
+  margin: 0;
+  color: var(--color-text-sub);
+  font-size: var(--font-size-sm);
+}
+
+/* 更新ボタン(白地に、アクセントの色の枠と文字) */
+.header-refresh {
+  padding: 2px var(--space-3);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+}
+
+/* 取りに行っている最中(押せないことが分かるよう、控えめな色にする) */
+.header-refresh:disabled {
+  border-color: var(--color-border);
+  color: var(--color-text-sub);
+  cursor: default;
+}
+
+/* キーボードで選んでいるときは、枠を出して位置を分かるようにする */
+.header-refresh:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}

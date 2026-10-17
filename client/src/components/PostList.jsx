@@ -6,7 +6,16 @@ import './PostList.css'
 // 投稿の一覧と、読み込みの状態に応じた表示を行う部品
 // posts:投稿の配列 / isLoading:最初の20件を読み込み中か / isError:読み込みに失敗したか
 // hasMore:続きがあるか / isLoadingMore:「もっと見る」で読み込み中か / onLoadMore:「もっと見る」を押したときに呼ぶ関数
-function PostList({ posts, isLoading, isError, hasMore, isLoadingMore, onLoadMore }) {
+// onToggleFavorite:カードのお気に入りのボタンを押したときに呼ぶ関数(この部品は使わず、カードへそのまま渡す)
+function PostList({
+  posts,
+  isLoading,
+  isError,
+  hasMore,
+  isLoadingMore,
+  onLoadMore,
+  onToggleFavorite,
+}) {
   // 最初の20件を読み込み中:案内だけを表示する
   if (isLoading) {
     return <p className="post-list-message">読み込み中</p>
@@ -17,7 +26,7 @@ function PostList({ posts, isLoading, isError, hasMore, isLoadingMore, onLoadMor
     return isError ? (
       <p className="post-list-message post-list-error">読み込みに失敗しました</p>
     ) : (
-      <p className="post-list-message">まだ投稿がありません</p>
+      <p className="post-list-message">投稿がありません</p>
     )
   }
 
@@ -27,8 +36,8 @@ function PostList({ posts, isLoading, isError, hasMore, isLoadingMore, onLoadMor
         {/* 受け取った順のまま、投稿1件につきカードを1枚作る */}
         {posts.map((post) => (
           // key は、React が各カードを見分けるための目印(投稿の id を使う)
-          <li key={post.id}>
-            <PostCard post={post} />
+          <li key={post.id} id={`post-${post.id}`}>
+            <PostCard post={post} onToggleFavorite={onToggleFavorite} />
           </li>
         ))}
       </ul>

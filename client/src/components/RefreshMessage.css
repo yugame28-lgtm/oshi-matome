@@ -1,0 +1,24 @@
+/* 表示の入れ物(高さを0にして場所を取らず、スクロールしても画面の上のほうにとどまる) */
+.refresh-message {
+    position: sticky;
+    top: var(--space-2);
+    height: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* 表示の文字(入れ物からはみ出して、一覧の上に重なる。押せないので、お知らせのボタンとは違う白地にする) */
+  .refresh-message-text {
+    align-self: flex-start;
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: var(--color-surface);
+    font-size: var(--font-size-sm);
+    font-weight: bold;
+    /* 一覧から浮いて見えるように、薄い影を付ける */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  

@@ -1,0 +1,31 @@
+/* スライド全体(タブとのあいだに余白をとる) */
+.favorite-slider {
+    margin-bottom: var(--space-4);
+  }
+  
+  /* 見出し(小さく控えめにする) */
+  .favorite-slider-title {
+    margin: 0 0 var(--space-2);
+    color: var(--color-text-sub);
+    font-size: var(--font-size-sm);
+  }
+  
+  /* カードを横に並べ、はみ出した分は横にスライドして見る */
+  .favorite-slider-list {
+    display: flex;
+    gap: var(--space-3);
+    margin: 0;
+    /* 下に、スクロールバーの分の余白をとる */
+    padding: 0 0 var(--space-2);
+    list-style: none;
+    overflow-x: auto;
+    /* スライドを止めたとき、カードの左はしにぴたっと合わせる */
+    scroll-snap-type: x mandatory;
+  }
+  
+  /* カード1枚分の場所(縮まないようにし、止まる位置をカードの左はしにする) */
+  .favorite-slider-item {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  

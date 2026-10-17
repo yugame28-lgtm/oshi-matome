@@ -1,9 +1,9 @@
+// 状態を持つ道具(useState)を読み込む
+import { useState } from 'react'
 // このカード専用のCSSを読み込む
 import './PostCard.css'
-
 // 画像を枚数に応じて並べる部品を読み込む
 import MediaGrid from './MediaGrid.jsx'
-
 
 // 投稿日時(UTC)を、日本時間の「年/月/日 時:分」の文字列に変える
 function formatPostedAt(postedAt) {
@@ -22,8 +22,28 @@ function formatPostedAt(postedAt) {
   })
 }
 
-// 投稿1件をカードとして表示する部品(post に投稿1件ぶんのデータを受け取る)
-function PostCard({ post }) {
+// 投稿1件をカードとして表示する部品
+// post:投稿1件ぶんのデータ / onToggleFavorite:お気に入りのボタンを押したときに呼ぶ関数(成功なら true、失敗なら false が返る)
+function PostCard({ post, onToggleFavorite }) {
+  // お気に入りの変更を送っている最中か(このカードだけの状態なので、カードの中で持つ)
+  const [isSaving, setIsSaving] = useState(false)
+  // お気に入りの変更に失敗したか
+  const [isFavoriteError, setIsFavoriteError] = useState(false)
+
+  // お気に入りのボタンが押されたとき
+  async function handleFavoriteClick() {
+    // 送っている最中は押せなくし、前の失敗の知らせが残っていれば消す
+    setIsSaving(true)
+    setIsFavoriteError(false)
+
+    // 今と逆の状態(付いていれば外す、外れていれば付ける)に変えるよう頼み、結果を待つ
+    const isSucceeded = await onToggleFavorite(post.id, !post.is_favorite)
+
+    // 失敗していたら知らせを出し、ボタンを押せるように戻す
+    setIsFavoriteError(!isSucceeded)
+    setIsSaving(false)
+  }
+
   return (
     <article className="post-card">
       {/* 上段:アイコンと投稿者の情報 */}
@@ -52,11 +72,36 @@ function PostCard({ post }) {
       {/* 本文(改行はCSSで保持する) */}
       <p className="post-card-text">{post.text}</p>
 
-         {/* 画像(0枚なら何も表示しない)。media がないデータでも動くよう、そのときは0枚として渡す */}
-         <MediaGrid media={post.media ?? []} />
+      {/* 画像(0枚なら何も表示しない)。media がないデータでも動くよう、そのときは0枚として渡す */}
+      <MediaGrid media={post.media ?? []} />
 
-      {/* 下段:元の投稿を新しいタブで開くリンク */}
+      {/* 下段:左にお気に入りのボタン、右に元の投稿を開くリンク */}
       <footer className="post-card-footer">
+        <div className="post-card-favorite-area">
+          {/* お気に入りのボタン(付いていれば ★、外れていれば ☆) */}
+          {/* 記号だけでは読み上げソフトに伝わらないので、aria-label で名前を、aria-pressed で付いているかを伝える */}
+          <button
+            type="button"
+            className={
+              post.is_favorite ? 'post-card-favorite post-card-favorite-on' : 'post-card-favorite'
+            }
+            onClick={handleFavoriteClick}
+            disabled={isSaving}
+            aria-label="お気に入り"
+            aria-pressed={post.is_favorite}
+          >
+            {post.is_favorite ? '★' : '☆'}
+          </button>
+
+          {/* 失敗の知らせ(次にボタンを押すまで、ボタンのとなりに出す) */}
+          {isFavoriteError && (
+            <span className="post-card-favorite-error" role="alert">
+              変更できませんでした
+            </span>
+          )}
+        </div>
+
+        {/* 元の投稿を新しいタブで開くリンク */}
         <a
           className="post-card-link"
           href={post.post_url}
